@@ -79,7 +79,7 @@ def sendEmail(to, content):
     server.sendmail('youremail@gmail.com', to, content)
     server.close()
 
-if __name__ == "main":
+if __name__ == "__main__":
     wishme()
     speak("Hello User how can i help u")
 
