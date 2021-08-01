@@ -1,7 +1,9 @@
+import sys
+
 import pyjokes
 import pyttsx3
 import datetime
-# import pyaudio
+
 import speech_recognition as sr
 import wikipedia
 import webbrowser as wb
@@ -11,7 +13,7 @@ import smtplib
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# engine.setProperty('voice', voices[0].id)
+engine.setProperty('voice', voices[0].id)
 voicerate = 200
 engine.setProperty('rate', voicerate)
 
@@ -55,11 +57,11 @@ def getcommand():
         try:
             print("Recognizing...")
             query = r.recognize_google(audio, language='en-us')
-            speak(query)
+
             print(f"User said: {query}\n")
 
         except:
-            # print(e)
+
             print("Say that again please...")
             return "None"
         return query
@@ -81,13 +83,17 @@ def sendEmail(to, content):
 
 if __name__ == "__main__":
     wishme()
-    speak("Hello User how can i help u")
+    speak("Hello User this is Jarvis how can i help u")
 
       # date_()
     while True:
         query = getcommand().lower()
-
-        if 'wikipedia' in query:
+        if "open notepad" in query:
+            path = "C:\\Windows\\System32\\notepad.exe"
+            os.startfile(path)
+        elif "open facebook" in query:
+            webbrowser.open("www.facebook.com")
+        elif 'wikipedia' in query:
             speak("searching wikipedia...")
             query = query.replace("wikipedia", "")
             results = wikipedia.summary(query, sentences=1)
@@ -96,10 +102,12 @@ if __name__ == "__main__":
             speak(results)
 
         elif "open youtube" in query:
-            wb.open("youtube.com/watch?v=50VNCymT-Cs")
+            wb.open("www.youtube.com")
 
         elif "google" in query:
-            wb.open("google.com")
+            speak("what should i search in google")
+            cm = getcommand().lower()
+            wb.open(f"{cm}")
 
         elif "play music" in query:
             location = 'D:\\mobile backup\\Gym song'
@@ -113,11 +121,8 @@ if __name__ == "__main__":
             time()
 
         elif 'chrome' in query:
-            speak("what should i search")
-            path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe %s"
-            chromepath = getcommand().lower()
-            print(chromepath)
-            wb.get(path).open_new_tab(chromepath+'.com')
+            path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            os.startfile(path)
 
         elif "visual code" in query:
             path = "C:\\Users\\Anshu\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
@@ -144,10 +149,6 @@ if __name__ == "__main__":
         elif 'restart' in query:
             os.system("shutdown /r /t 1")
 
-        elif 'stop' in query:
-            speak("thank u")
-            break
-
         elif "remember that" in query:
             speak("what should i remember")
             notes = getcommand()
@@ -164,6 +165,10 @@ if __name__ == "__main__":
 
         elif "joke" in query:
             jokes()
-
-        else:
-            exit()
+        elif 'stop' in query:
+            speak("thank u have a good day sir")
+            sys.exit()
+        elif 'nothing' in query:
+            speak("thank u have a good day sir")
+            sys.exit()
+        speak("what can i do for you")
