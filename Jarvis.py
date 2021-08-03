@@ -1,9 +1,7 @@
 import sys
-
 import pyjokes
 import pyttsx3
 import datetime
-
 import speech_recognition as sr
 import wikipedia
 import webbrowser as wb
@@ -92,7 +90,7 @@ if __name__ == "__main__":
             path = "C:\\Windows\\System32\\notepad.exe"
             os.startfile(path)
         elif "open facebook" in query:
-            webbrowser.open("www.facebook.com")
+            wb.open("www.facebook.com")
         elif 'wikipedia' in query:
             speak("searching wikipedia...")
             query = query.replace("wikipedia", "")
